@@ -1,0 +1,48 @@
+# FixMatch - CardioVis: frames (unlabeled) + label (mask, matching 1->01044)
+device: 'cuda'
+seed: 1
+fold: 1
+debug: False
+log: False
+data:
+  name: 'cardio'
+  num_classes: 4  # 0=nền, 1=Epicardial, 2=Pericardium, 3=Phrenic nerve
+  train_folder: 'data_processed/cardio/train/labeled_data'
+  val_folder: 'data_processed/cardio/train/labeled_data'
+  test_folder: 'data_processed/cardio/train/labeled_data'
+  unlabeled_folder: 'data_processed/cardio/train/unlabeled_data'
+  save_folder: 'checkpoints/cardio'
+  train_aug: True
+  img_size: 224
+
+semi:
+  conf_thresh: 0.95
+
+train:
+  l_batchsize: 8
+  u_batchsize: 8
+  num_workers: 4
+  num_epochs: 100
+  num_iters: False
+  ema_decay: 0.99
+  optimizer:
+    mode: 'adamw'
+    adamw:
+      lr: 1e-4
+      betas: [0.9, 0.999]
+      eps: 1e-8
+      weight_decay: 0.05
+    adam:
+      lr: 1e-4
+      betas: [0.9, 0.999]
+
+test:
+  only_test: False
+  test_model_dir: ''
+  num_workers: 4
+  batch_size: 8
+
+model_encoder_id: 0
+model_adapt:
+  adapt_method: False
+  num_domains: 1
