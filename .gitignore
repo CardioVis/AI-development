@@ -1,0 +1,13 @@
+/tmp
+*.xml
+/__pycache__
+.venv
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+*.docx
+/stage_outputs
