@@ -23,6 +23,42 @@ LS_TASK_ID_RANGE: dict[str, tuple[int, int]] = {
     "rach_nhi": (5433, 5731),
 }
 
+# Assumed Label Studio IDs for Features_timestamps batch (continuous after old ranges).
+LS_FEATURES_NEXT: dict[str, int] = {
+    "dat_kim_goc": 5956,
+    "rach_nhi": 6006,
+}
+
+# Last full-frame index from the original *_full.mp4 extract batch.
+LAST_FRAME_BEFORE_FEATURES: dict[str, int] = {
+    "dat_kim_goc": 6917,
+    "rach_nhi": 5980,
+}
+
+# Features_timestamps clips (no merge into *_full.mp4). Patient 33 rach_nhi
+# keeps the old clip (5_00-5_09) and adds a new one (0_05-0_15).
+FEATURE_CLIP_ORDER: dict[str, list[str]] = {
+    "dat_kim_goc": [
+        "patient_34_goc_v002_dat_kim_goc_4_15-4_25.mp4",
+        "patient_35_goc_v002_dat_kim_goc_5_08-5_18.mp4",
+        "patient_39_goc_v001_dat_kim_goc_5_06-5_16.mp4",
+        "patient_40_goc_v002_dat_kim_goc_7_31-7_41.mp4",
+        "patient_43_goc_v004_dat_kim_goc_1_37-1_47.mp4",
+    ],
+    "rach_nhi": [
+        # Distinct from legacy patient_33_goc_v001_rach_nhi_5_00-5_09.mp4
+        "patient_33_goc_v001_rach_nhi_5-15.mp4",
+        "patient_34_goc_v003_rach_nhi_2_45-2_55.mp4",
+        "patient_35_goc_v003_rach_nhi_2_33-2_43.mp4",
+        "patient_36_goc_v001_rach_nhi_6-16.mp4",
+        "patient_37_goc_v002_rach_nhi_8_57-9_07.mp4",
+        "patient_38_goc_v001_rach_nhi_0-10.mp4",
+        "patient_39_goc_v002_rach_nhi_3_50-4_00.mp4",
+        "patient_40_goc_v003_rach_nhi_7_27-7_37.mp4",
+        "patient_43_goc_v004_rach_nhi_4_43-4_53.mp4",
+    ],
+}
+
 ROOT = Path(__file__).resolve().parent
 TASK_RESULTS = ROOT / "tmp" / "task_results.csv"
 FRAME_EXTRACT_REPORT = ROOT / "tmp" / "frame_extract_report.csv"
@@ -299,7 +335,7 @@ def build_stage_manifest(
     return rows
 
 
-def main() -> None:
+def main(include_features_batch: bool = False) -> None:
     extracted_counts = load_extracted_frame_counts()
     expected_sample_counts = load_expected_sample_counts()
     task_durations = load_task_durations()
@@ -398,6 +434,25 @@ def main() -> None:
         )
     print(f"Wrote CSVs to {OUTPUT_DIR}")
 
+    if include_features_batch:
+        # Append Features_timestamps rows without regenerating / overwriting old patient splits.
+        # Prefer real Colab/local frame map when present.
+        from append_features_sample_manifest import main as append_features_main
+
+        print("Appending Features_timestamps batch (frozen old splits)...")
+        append_features_main()
+
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Build sample↔patient manifests")
+    parser.add_argument(
+        "--include-features-batch",
+        action="store_true",
+        help="After rebuilding the original batch, append Features_timestamps samples "
+        "(continuous frame idx + assumed LS IDs; freeze old patient splits).",
+    )
+    args = parser.parse_args()
+    main(include_features_batch=args.include_features_batch)
+

@@ -1,17 +1,19 @@
-# FixMatch - CardioVis: frames (unlabeled) + label (mask, matching 1->01044)
+# FixMatch — dat_kim_goc (Label Studio project-74)
+# Paths are relative to AI-development repo root (or overridden via --data_root on Colab).
+# Ablation knobs (exclude_bg / dense U / class weights / high-res) are set via CLI or notebook CONFIG.
 device: 'cuda'
 seed: 1
 fold: 1
 debug: False
 log: False
 data:
-  name: 'cardio'
-  num_classes: 4  # 0=nền, 1=Epicardial, 2=Pericardium, 3=Phrenic nerve
-  train_folder: 'data_processed/cardio/train/labeled_data'
-  val_folder: 'data_processed/cardio/train/labeled_data'
-  test_folder: 'data_processed/cardio/train/labeled_data'
-  unlabeled_folder: 'data_processed/cardio/train/unlabeled_data'
-  save_folder: 'checkpoints/cardio'
+  name: 'dat_kim_goc'
+  num_classes: 18  # 0=background + 17 brush labels (see class_map.json)
+  train_folder: 'training_related/dat_kim_goc/labeled_data'
+  val_folder: 'training_related/dat_kim_goc/labeled_data'
+  test_folder: 'training_related/dat_kim_goc/test_data'
+  unlabeled_folder: 'training_related/dat_kim_goc/unlabeled_data'
+  save_folder: 'checkpoints/dat_kim_goc'
   train_aug: True
   img_size: 224
 
@@ -19,10 +21,12 @@ semi:
   conf_thresh: 0.95
 
 train:
-  l_batchsize: 8
-  u_batchsize: 8
+  l_batchsize: 32
+  u_batchsize: 32
   num_workers: 4
-  num_epochs: 100
+  num_epochs: 30
+  warmup_epochs: 15
+  folds: [1, 2, 3, 4, 5]
   num_iters: False
   ema_decay: 0.99
   optimizer:
@@ -40,7 +44,7 @@ test:
   only_test: False
   test_model_dir: ''
   num_workers: 4
-  batch_size: 8
+  batch_size: 16
 
 model_encoder_id: 0
 model_adapt:

@@ -1,5 +1,4 @@
 /tmp
-*.xml
 /__pycache__
 .venv
 *.pyc
@@ -11,3 +10,6 @@
 *.pyzw
 *.docx
 /stage_outputs
+/time_to_event_prediction_data
+/training_related/dat_kim_goc/
+/checkpoints/

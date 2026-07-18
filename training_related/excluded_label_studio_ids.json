@@ -1,0 +1,10 @@
+{
+  "_comment": "Frames/tasks excluded from FixMatch train/test (wrong surgical task).",
+  "atrial_incision": {
+    "ids": [5526],
+    "ranges_inclusive": [[5501, 5511], [5712, 5722]]
+  },
+  "cardioplegia_needle_replacement": {
+    "ranges_inclusive": [[5164, 5173], [5423, 5432]]
+  }
+}

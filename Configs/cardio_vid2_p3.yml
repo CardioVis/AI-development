@@ -1,0 +1,213 @@
+# # FixMatch - CardioVis: frames (unlabeled) + label (mask, matching 1->01044)
+# device: 'cuda'
+# seed: 1
+# fold: 1
+# debug: False
+# log: False
+# data:
+#   name: 'cardio'
+#   num_classes: 4  # 0=nền, 1=Epicardial, 2=Pericardium, 3=Phrenic nerve
+#   train_folder: 'data_processed/cardio/train/labeled_data'
+#   val_folder: 'data_processed/cardio/train/labeled_data'
+#   test_folder: 'data_processed/cardio/train/labeled_data'
+#   unlabeled_folder: 'data_processed/cardio/train/unlabeled_data'
+#   save_folder: 'checkpoints/cardio'
+#   train_aug: True
+#   img_size: 224
+
+# semi:
+#   conf_thresh: 0.95
+
+# train:
+#   l_batchsize: 8
+#   u_batchsize: 8
+#   num_workers: 4
+#   num_epochs: 100
+#   num_iters: False
+#   ema_decay: 0.99
+#   optimizer:
+#     mode: 'adamw'
+#     adamw:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+#       eps: 1e-8
+#       weight_decay: 0.05
+#     adam:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+
+# test:
+#   only_test: False
+#   test_model_dir: ''
+#   num_workers: 4
+#   batch_size: 8
+
+# model_encoder_id: 0
+# model_adapt:
+#   adapt_method: False
+#   num_domains: 1
+# FixMatch - CardioVis: frames (unlabeled) + label (mask, matching 1->01044)
+
+# label_fea3_p10
+# device: 'cuda'
+# seed: 1
+# fold: 1
+# debug: False
+# log: False
+# data:
+#   name: 'cardio_fea3_p10'
+#   num_classes: 9  # 0=nền, 1=Aortic root, 2=Auricles, 3=Epicardial fat on aortic, 4=Grasper, 5=Needle holders, 6=Phrenic nerve, 7=Pericardium, 8=Epicardial adipose tissue
+#   train_folder: 'data_processed/cardio/train/labeled_data'
+#   val_folder: 'data_processed/cardio/train/labeled_data'
+#   test_folder: 'data_processed/cardio/train/labeled_data'
+#   unlabeled_folder: 'data_processed/cardio/train/unlabeled_data'
+#   save_folder: 'checkpoints/cardio_fea3_p10'
+#   train_aug: True
+#   img_size: 224
+
+# semi:
+#   conf_thresh: 0.95
+
+# train:
+#   l_batchsize: 8
+#   u_batchsize: 8
+#   num_workers: 4
+#   num_epochs: 60
+#   num_iters: False
+#   ema_decay: 0.99
+#   optimizer:
+#     mode: 'adamw'
+#     adamw:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+#       eps: 1e-8
+#       weight_decay: 0.05
+#     adam:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+
+# test:
+#   only_test: False
+#   test_model_dir: ''
+#   num_workers: 4
+#   batch_size: 8
+
+# model_encoder_id: 0
+# model_adapt:
+#   adapt_method: False
+#   num_domains: 1
+
+#-------------------------------fea2_p10 (Label Studio JSON + train_from_lsjson)--------------------------------
+# Chuẩn id trong mask .npy khớp TAG_TO_CLASS ở prepare_cardio_data_from_labelstudio_json.py
+# num_classes = max(id) + 1 = 10 + 1 = 11 (gồm nền 0).
+# Lưu ý: sau filter_and_refold_labeled_data.py đã xóa mẫu có class 9 (Pericardial stay sutures)
+# và mẫu mask chỉ 2 unique — id 9 có thể không còn xuất hiện trong data, nhưng vẫn giữ 11 lớp
+# vì mask vẫn dùng id=10 (Pericardium boundary) và không remap nhãn.
+# TAG_TO_CLASS = {
+#     "epicardial adipose tissue": 1,
+#     "pericardium": 2,
+#     "phrenic nerve": 3,
+#     "aortic root": 4,
+#     "auricles": 5,
+#     "epicardial fat on aortic": 6,
+#     "grasper": 7,
+#     "needle holders": 8,
+#     "pericardial stay sutures": 9,
+#     "pericardium boundary": 10,
+# }
+
+#-------------------------------p28 (project-28 JSON, 16 lớp + nền)--------------------------------
+# TAG_TO_CLASS khớp prepare_cardio_data_from_labelstudio_json.py; suction→11, grasper→16.
+# device: 'cuda'
+# seed: 1
+# fold: 1
+# debug: False
+# log: False
+# data:
+#   name: 'cardio_p28'
+#   num_classes: 17
+#   train_folder: 'data_processed/cardio/train_from_lsjson_p28/labeled_data'
+#   val_folder: 'data_processed/cardio/train_from_lsjson_p28/labeled_data'
+#   test_folder: 'data_processed/cardio/train_from_lsjson_p28/labeled_data'
+#   unlabeled_folder: 'data_processed/cardio/train_from_lsjson_p28/unlabeled_data'
+#   save_folder: 'checkpoints/cardio_p28'
+#   train_aug: True
+#   img_size: 224
+# semi:
+#   conf_thresh: 0.95
+# train:
+#   l_batchsize: 8
+#   u_batchsize: 8
+#   num_workers: 4
+#   num_epochs: 60
+#   num_iters: False
+#   ema_decay: 0.99
+#   optimizer:
+#     mode: 'adamw'
+#     adamw:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+#       eps: 1e-8
+#       weight_decay: 0.05
+#     adam:
+#       lr: 1e-4
+#       betas: [0.9, 0.999]
+# test:
+#   only_test: False
+#   test_model_dir: ''
+#   num_workers: 4
+#   batch_size: 8
+# model_encoder_id: 0
+# model_adapt:
+#   adapt_method: False
+#   num_domains: 1
+
+device: 'cuda'
+seed: 1
+fold: 1
+debug: False
+log: False
+data:
+  name: 'cardio_vid2_p3'
+  num_classes: 25  # 0=background + 24 mask label classes (see class_map.json)
+  train_folder: 'data_processed/cardio/vid002_2025-04-01_seg_9m00_to_end/labeled_data'
+  val_folder: 'data_processed/cardio/vid002_2025-04-01_seg_9m00_to_end/labeled_data'
+  test_folder: 'data_processed/cardio/vid002_2025-04-01_seg_9m00_to_end/labeled_data'
+  unlabeled_folder: 'data_processed/cardio/vid002_2025-04-01_seg_9m00_to_end/unlabeled_data'
+  save_folder: 'checkpoints/cardio_vid2_p3'
+  train_aug: True
+  img_size: 224
+
+semi:
+  conf_thresh: 0.95
+
+train:
+  l_batchsize: 8
+  u_batchsize: 2
+  num_workers: 4
+  num_epochs: 30
+  warmup_epochs: 15   # supervised-only warmup before FixMatch consistency kicks in
+  folds: [1]          # folds to train; use [1,2,3,4,5] for full 5-fold CV
+  num_iters: False
+  ema_decay: 0.99
+  optimizer:
+    mode: 'adamw'
+    adamw:
+      lr: 1e-4
+      betas: [0.9, 0.999]
+      eps: 1e-8
+      weight_decay: 0.05
+    adam:
+      lr: 1e-4
+      betas: [0.9, 0.999]
+
+test:
+  only_test: False
+  test_model_dir: ''
+  num_workers: 4
+  batch_size: 4
+
+model_encoder_id: 0
+model_adapt:
+  adapt_method: False
+  num_domains: 1

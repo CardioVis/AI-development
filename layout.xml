@@ -1,0 +1,131 @@
+<View>
+  <Video name="video" value="$video" timelineHeight="500" />
+
+  <Header value="DANH SÁCH CÁC PHASES &amp; SUB-PHASES PHẪU THUẬT" style="font-size: 18px; color: #d32f2f; margin-top: 20px; border-bottom: 2px solid #ccc; padding-bottom: 5px;" />
+  <View style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+    <Text name="instruction" value="Mẹo: Nhấn giữ SHIFT + Kéo chuột trên timeline để vẽ đè Sub-phase lên Main Phase một cách dễ dàng." />
+  </View>
+
+  <!-- CHỈ SỬ DỤNG MỘT THẺ TIMELINELABELS DUY NHẤT -->
+  <TimelineLabels name="all_phases" toName="video">
+    
+    <!-- ================= PHASE 1 ================= -->
+    <Label value="1 - Pericardiotomy (Main)" background="#000000" />
+    <Label value="1.1 Pericardial field orientation" background="#1d81cd" />
+    <Label value="1.2 Initial pericardial incision" background="#3b99e0" />
+    <Label value="1.3 Extension of pericardiotomy" background="#59b1f3" />
+    <Label value="1.4 Pericardial edge separation" background="#77c9ff" />
+
+    <!-- ================= PHASE 2 ================= -->
+    <Label value="2 - Pericardial hitching (Main)" background="#000000" />
+    <Label value="2.1 Stay-suture point selection" background="#8e24aa" />
+    <Label value="2.2 Pericardial stay-suture placement" background="#ab47bc" />
+    <Label value="2.3 Exteriorization or suspension" background="#ba68c8" />
+    <Label value="2.4 Exposure stabilization" background="#ce93d8" />
+
+    <!-- ================= PHASE 3 ================= -->
+    <Label value="3 - Aortic purse-string (Main)" background="#000000" />
+    <Label value="3.1 Aortic exposure and site selection" background="#e65100" />
+    <Label value="3.2 First pledgeted aortic bite" background="#f57c00" />
+    <Label value="3.3 Circular/oval purse-string completion" background="#ff9800" />
+    <Label value="3.4 Suture-end securing" background="#ffb74d" />
+
+    <!-- ================= PHASE 4 ================= -->
+    <Label value="4 - Cardioplegia needle insertion (Main)" background="#000000" />
+    <Label value="4.1 Needle alignment at purse-string center" background="#2e7d32" />
+    <Label value="4.2 Aortic root puncture and needle seating" background="#43a047" />
+    <Label value="4.3 Cardioplegia tubing connection" background="#66bb6a" />
+    <Label value="4.4 Snare tightening and leak check" background="#81c784" />
+
+    <!-- ================= PHASE 5 ================= -->
+    <Label value="5 - Aortic cross-clamping and cardioplegia delivery (Main)" background="#000000" />
+    <Label value="5.1 CPB/cooling and exposure confirmation" background="#c62828" />
+    <Label value="5.2 Chitwood clamp insertion and positioning" background="#e53935" />
+    <Label value="5.3 Aortic cross-clamp application" background="#ef5350" />
+    <Label value="5.4 Antegrade cardioplegia delivery and arrest" background="#e57373" />
+
+    <!-- ================= PHASE 6 ================= -->
+    <Label value="6 - Interatrial groove retraction (Main)" background="#000000" />
+    <Label value="6.1 Interatrial groove identification" background="#00695c" />
+    <Label value="6.2 Groove stay-suture placement" background="#00897b" />
+    <Label value="6.3 Exteriorization and chest-wall anchoring" background="#26a69a" />
+    <Label value="6.4 Left atrial exposure confirmation" background="#4db6ac" />
+
+    <!-- ================= PHASE 7 ================= -->
+    <Label value="7 - Left atriotomy (Main)" background="#000000" />
+    <Label value="7.1 Atriotomy site orientation" background="#4527a0" />
+    <Label value="7.2 Initial left atrial entry" background="#512da8" />
+    <Label value="7.3 Atriotomy extension" background="#5e35b1" />
+    <Label value="7.4 Atrial opening, retraction and suction" background="#673ab7" />
+
+    <!-- ================= PHASE 8 ================= -->
+    <Label value="8 - MV exposure and assessment (Main)" background="#000000" />
+    <Label value="8.1 LA/mitral retractor placement" background="#1565c0" />
+    <Label value="8.2 Orientation of A1-A2-A3 and P1-P2-P3" background="#1976d2" />
+    <Label value="8.3 Systematic valve analysis" background="#1e88e5" />
+    <Label value="8.4 Saline/probing test and strategy finalization" background="#2196f3" />
+
+    <!-- ================= PHASE 9 ================= -->
+    <Label value="9 - MV leaflet/chordal repair (Main)" background="#000000" />
+    <Label value="9.1 Pathologic segment exposure and marking" background="#0277bd" />
+    <Label value="9.2 Resection or leaflet remodeling" background="#0288d1" />
+    <Label value="9.3 Artificial neochordae/chordal reconstruction" background="#039be5" />
+    <Label value="9.4 Leaflet-edge approximation/commissural repair" background="#03a9f4" />
+    <Label value="9.5 Interim saline test and adjustment" background="#29b6f6" />
+    <Label value="9.6 Leaflet repair completion before annuloplasty" background="#4fc3f7" />
+
+    <!-- ================= PHASE 10 ================= -->
+    <Label value="10 - Mitral annuloplasty (Main)" background="#000000" />
+    <Label value="10.1 Annular sizing" background="#00838f" />
+    <Label value="10.2 Annular suture placement" background="#0097a7" />
+    <Label value="10.3 Ring loading outside the chest" background="#00acc1" />
+    <Label value="10.4 Ring introduction and seating" background="#00bcd4" />
+    <Label value="10.5 Knot tying/Cor-Knot fixation" background="#26c6da" />
+    <Label value="10.6 Ring seating and symmetry check" background="#4dd0e1" />
+
+    <!-- ================= PHASE 11 ================= -->
+    <Label value="11 - Post-repair valve assessment (Main)" background="#000000" />
+    <Label value="11.1 Saline filling test" background="#2e7d32" />
+    <Label value="11.2 Coaptation-line and commissural inspection" background="#388e3c" />
+    <Label value="11.3 Screen for residual leak/prolapse/restriction" background="#43a047" />
+    <Label value="11.4 Corrective revision if needed" background="#4caf50" />
+    <Label value="11.5 Final visual acceptance" background="#66bb6a" />
+    
+    <!-- ================= PHASE 12 ================= -->
+    <Label value="12 - Left atrial closure (Main)" background="#000000" />
+    <Label value="12.1 Closure preparation and de-airing set-up" background="#6a1b9a" />
+    <Label value="12.2 Running suture first limb" background="#7b1fa2" />
+    <Label value="12.3 Running suture completion" background="#8e24aa" />
+    <Label value="12.4 Hemostasis and LA geometry check" background="#9c27b0" />
+
+    <Label value="12* - Right atrial closure (Main)" background="#000000" />
+    <Label value="12R.1 Right atriotomy edge alignment" background="#c2185b" />
+    <Label value="12R.2 Running/interrupted RA closure" background="#d81b60" />
+    <Label value="12R.3 Caval inflow and TV geometry check" background="#e91e63" />
+    <Label value="12R.4 Hemostasis confirmation" background="#ec407a" />
+
+    <!-- ================= PHASE 13 ================= -->
+    <Label value="13 - De-airing and clamp release (Main)" background="#000000" />
+    <Label value="13.1 De-airing preparation" background="#33691e" />
+    <Label value="13.2 Left-heart venting and bubble evacuation" background="#558b2f" />
+    <Label value="13.3 Aortic root venting confirmation" background="#689f38" />
+    <Label value="13.4 Chitwood clamp release" background="#7cb342" />
+    <Label value="13.5 Heart rebeat and residual-air check" background="#8bc34a" />
+    
+    <!-- ================= PHASE 14 ================= -->
+    <Label value="14 - Removal of cannulas/vents (Main)" background="#000000" />
+    <Label value="14.1 Stability confirmation before removal" background="#827717" />
+    <Label value="14.2 Cardioplegia cannula withdrawal" background="#9e9d24" />
+    <Label value="14.3 Left vent/left atrial suction removal" background="#afb42b" />
+    <Label value="14.4 Cannulation/vent-site hemostasis check" background="#c0ca33" />
+    
+    <!-- ================= PHASE 15 ================= -->
+    <Label value="15 - Hemostasis check &amp; weaning (Main)" background="#000000" />
+    <Label value="15.1 Pericardial/atrial/aortic suture-line inspection" background="#bf360c" />
+    <Label value="15.2 Repair/ventricular function confirmation by TEE" background="#d84315" />
+    <Label value="15.3 Gradual CPB weaning" background="#e64a19" />
+    <Label value="15.4 Post-weaning hemostasis/reversal workflow" background="#f4511e" />
+    <Label value="15.5 Drain placement and final endoscopic field check" background="#ff5722" />
+    
+  </TimelineLabels>
+</View>

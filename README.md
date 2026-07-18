@@ -24,6 +24,8 @@ This repository contains a **FixMatch-style** semi-supervised training pipeline 
 - `fixmatch.py`: main FixMatch training / validation / testing loop (k-fold).
 - `prepare_cardio_data.py`: converts raw CardioVis frames + per-class masks into `.npy` tensors and split lists.
 - `Configs/cardio.yml`: main configuration for CardioVis paths and hyperparameters.
+- `Configs/cardio_vid2_p3.yml`: newer vid2_p3 experiment config (25 classes; synced from Backend-Inference).
+- `Models/DeepLabV3Plus/`: DeepLabV3+ backbones used by `fixmatch.py` (`deeplabv3plus_resnet101`, …).
 - `Datasets/`: dataset wrappers + strong/weak augmentation pipelines.
   - `Datasets/create_dataset.py`: reads fold lists + unlabeled list and loads `.npy` samples.
 - `Losses/`, `Utils/`: supporting code.
@@ -187,7 +189,7 @@ python fixmatch.py --exp cardio_fixmatch --config_yml Configs/cardio.yml --gpu 0
 What happens:
 
 - The script loads the config YAML, seeds RNGs, and selects GPU if available.
-- It loops through folds `1..5` (hard-coded in `fixmatch.py`) and writes outputs per fold to:
+- It loops through folds from `train.folds` in the YAML (default `[1,2,3,4,5]`) and writes outputs per fold to:
 
 ```text
 checkpoints/cardio/<exp>/fold<k>/
@@ -216,23 +218,13 @@ test:
 - Seeding is performed via `Utils/utils.py::fix_all_seed(seed)` and also sets CUDA seeds.
 - For exact reproducibility, consider controlling CUDA determinism flags and logging the exact environment (CUDA, driver, torch build).
 
-## Known gaps / intended components
+## Known gaps / notes
 
-This repository snapshot is not fully self-contained:
-
-- **Missing model package**: `fixmatch.py` imports `from Models.DeepLabV3Plus import *` and calls:
-  - `deeplabv3plus_resnet101(num_classes=..., output_stride=8, pretrained_backbone=True)`
-
-  You must provide a `Models/DeepLabV3Plus.py` (or equivalent package) that defines this function (and any required classes) for training to run.
-
+- **Model package**: `Models/DeepLabV3Plus/` is included (copied from Backend-Inference). `fixmatch.py` imports `deeplabv3plus_resnet101(...)`.
 - **Stale references in the docstring / defaults**:
-  - `fixmatch.py` docstring references `multi_train_adapt.py` and `Configs/multi_train_local.yml`, which are not present here.
-  - The actual usable config shipped is `Configs/cardio.yml`.
-
-If you want this repo to be runnable “as-is”, the recommended cleanup is:
-
-- Add the missing `Models/` code, and
-- Remove/update references to non-existent scripts/configs in `fixmatch.py`.
+  - `fixmatch.py` docstring still mentions `multi_train_adapt.py` / `Configs/multi_train_local.yml` (legacy).
+  - Usable configs: `Configs/cardio.yml` (4-class baseline) and `Configs/cardio_vid2_p3.yml` (25-class experiment).
+- Training code was **copied** (not moved) from `Backend-Inference`; keep Backend-Inference for inference/serving code.
 
 ## License
 
